@@ -39,7 +39,8 @@ module Util
     swap,
     groupByn,
     space,
-    trim
+    trim,
+    whenM
   ) where
 
 import Codec.Picture
@@ -252,4 +253,8 @@ swap (a, b) = (b, a)
 groupByn :: Int -> [a] -> [[a]]
 groupByn _ [] = []
 groupByn n l = take n l : groupByn n (drop n l)
+
+whenM :: Bool -> b -> Maybe b
+whenM True x = Just x
+whenM False _ = Nothing
 

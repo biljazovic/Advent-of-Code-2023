@@ -11,6 +11,8 @@ build-type:     Simple
 
 library
   exposed-modules:
+      Day01
+      Day02
       Util
   other-modules:
       Paths_aoc2023
