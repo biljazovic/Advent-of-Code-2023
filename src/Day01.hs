@@ -25,7 +25,6 @@ solveB input = sum $ map f input
       whenM (isDigit (fun1 str)) (digitToInt (fun1 str)) <|>
       asum [whenM (num_s `fun2` str) num | (num_s, num) <- num_strs]
 
--- $> main01
 main01 :: IO ()
 main01 = do
   input <- lines <$> readFile "res/input01"

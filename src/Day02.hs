@@ -39,7 +39,6 @@ solveB = sum . map f
     f (Game _ colss) = product $ map (g colss) [Red, Green, Blue]
     g colss c = maximum (map (countCol c) colss)
 
--- $> main02
 main02 :: IO ()
 main02 = do
     input <- lines <$> readFile "res/input02"
