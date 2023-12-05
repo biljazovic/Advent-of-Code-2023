@@ -15,6 +15,7 @@ library
       Day02
       Day03
       Day04
+      Day05
       Util
   other-modules:
       Paths_aoc2023
@@ -54,6 +55,7 @@ library
     , monad-loops
     , mtl
     , multiset
+    , parallel
     , parser-combinators
     , pqueue
     , process
@@ -107,6 +109,7 @@ executable aoc2023
     , monad-loops
     , mtl
     , multiset
+    , parallel
     , parser-combinators
     , pqueue
     , process
