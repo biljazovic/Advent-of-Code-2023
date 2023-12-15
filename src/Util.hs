@@ -267,23 +267,9 @@ iterateWithCycle num fun x0 = xf
       let cyc_len = ind1 - ind0
        in xs !! (ind0 + (num-ind0) `mod` cyc_len)
     (ind0, ind1) = go Map.empty $ zip xs [0..]
-    go last_seen ((xi, ind) : rest) = if num == ind 
+    go last_seen ((xi, ind) : rest) = if num == ind
                                          then (0, ind)
                                          else case Map.lookup xi last_seen of
                                                 Just last_ind -> (last_ind, ind)
                                                 Nothing -> go (Map.insert xi ind last_seen) rest
     xs = iterate fun x0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
