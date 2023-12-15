@@ -17,6 +17,12 @@ library
       Day04
       Day05
       Day06
+      Day07
+      Day11
+      Day12
+      Day13
+      Day14
+      Day15
       Util
   other-modules:
       Paths_aoc2023

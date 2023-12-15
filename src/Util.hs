@@ -29,7 +29,6 @@ module Util
     matrixToString,
     iterateUntil,
     traceVar,
-    unorderedPairs,
     arrLookupWithDefault,
     mkUniq,
     showAnimation,
@@ -40,7 +39,9 @@ module Util
     groupByn,
     space,
     trim,
-    whenM
+    whenM,
+    makePairs,
+    iterateWithCycle
   ) where
 
 import Codec.Picture
@@ -231,9 +232,6 @@ iterateUntil stopCondition f start = let next = f start
 traceVar :: Show a => a -> a
 traceVar x = trace (show x) x
 
-unorderedPairs :: [a] -> [(a,a)]
-unorderedPairs xs = [ (xs !! i, xs !! j) | i <- [0 .. length xs-1], j <- [i .. length xs-1] ]
-
 arrLookupWithDefault :: Arr.Ix i => e -> Arr.Array i e -> i -> e
 arrLookupWithDefault d arr p = if inRange (Arr.bounds arr) p
                      then arr Arr.! p
@@ -257,4 +255,35 @@ groupByn n l = take n l : groupByn n (drop n l)
 whenM :: Bool -> b -> Maybe b
 whenM True x = Just x
 whenM False _ = Nothing
+
+makePairs :: [a] -> [(a, a)]
+makePairs [] = []
+makePairs (x : xs) = makePairs xs ++ map (x, ) xs
+
+iterateWithCycle :: Ord a => Int -> (a -> a) -> a -> a
+iterateWithCycle num fun x0 = xf
+  where
+    xf = if ind1 == num then xs !! num else
+      let cyc_len = ind1 - ind0
+       in xs !! (ind0 + (num-ind0) `mod` cyc_len)
+    (ind0, ind1) = go Map.empty $ zip xs [0..]
+    go last_seen ((xi, ind) : rest) = if num == ind 
+                                         then (0, ind)
+                                         else case Map.lookup xi last_seen of
+                                                Just last_ind -> (last_ind, ind)
+                                                Nothing -> go (Map.insert xi ind last_seen) rest
+    xs = iterate fun x0
+
+
+
+
+
+
+
+
+
+
+
+
+
 
