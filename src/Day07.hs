@@ -44,7 +44,6 @@ solveB input = sum $ zipWith (\(_, s) i -> s*i) sortedInput [1..]
   where
     sortedInput = sortBy (\(h1, _) (h2, _) -> compareHands (joker h1, h1) (joker h2, h2)) input
 
--- $> main07
 main07 :: IO ()
 main07 = do
     input <- map ((\(a : b : _) -> (a, read b :: Int)) . words) . lines <$> readFile "res/input07"
